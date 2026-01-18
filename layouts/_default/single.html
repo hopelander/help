@@ -1,0 +1,33 @@
+{{ define "main" }}
+
+{{ with .Parent }}
+  <a class="back-link" href="{{ .RelPermalink }}">
+    ← Назад
+  </a>
+{{ end }}
+
+<article class="article">
+
+  <h1>{{ .Title }}</h1>
+  
+  <nav class="breadcrumbs">
+  {{ range .Ancestors.Reverse }}
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a> →
+  {{ end }}
+  <span>{{ .Title }}</span>
+</nav>
+
+  {{ if .Params.description }}
+    <p class="description">
+      {{ .Params.description }}
+    </p>
+  {{ end }}
+
+  <div class="article-body">
+    {{ .Content }}
+  </div>
+
+</article>
+
+{{ end }}
+

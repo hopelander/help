@@ -1,0 +1,24 @@
+backend:
+  name: github
+  repo: <USERNAME>/<REPO>  # твой GitHub репозиторий
+  branch: main
+  auth_scope: repo
+  open_authoring: false
+  squash_merges: true
+
+media_folder: "static/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "help"
+    label: "Статьи"
+    folder: "content"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Audience", name: "audience", widget: "select", options: ["org", "participant"]}
+      - {label: "Featured", name: "featured", widget: "boolean"}
+      - {label: "Featured weight", name: "featured_weight", widget: "number"}
+      - {label: "Body", name: "body", widget: "markdown"}

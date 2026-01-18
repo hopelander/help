@@ -1,0 +1,61 @@
+{{ define "main" }}
+
+<h1>Обо всём</h1>
+
+<section>
+  <h2>Участникам</h2>
+
+  {{ range where .Site.RegularPages "Section" "participants" | first 5 }}
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+  {{ end }}
+</section>
+
+<section>
+  <h2>Организаторам</h2>
+
+  {{ range where .Site.RegularPages "Section" "org" | first 5 }}
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+  {{ end }}
+</section>
+
+
+
+
+
+<section class="featured">
+
+  {{ $featured := where .Site.RegularPages "Params.featured" true }}
+
+  {{ range sort $featured "Params.featured_weight" }}
+    <article class="featured-card">
+      <a href="{{ .RelPermalink }}">
+        <h2>{{ .Title }}</h2>
+
+        {{ with .Params.description }}
+          <p>{{ . }}</p>
+        {{ end }}
+      </a>
+    </article>
+  {{ end }}
+
+</section>
+
+<section class="featured">
+
+  <h2>Организаторам</h2>
+
+  {{ range where $featured "Params.audience" "org" }}
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+  {{ end }}
+
+  <h2>Участникам</h2>
+
+  {{ range where $featured "Params.audience" "participant" }}
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+  {{ end }}
+
+</section>
+OD
+
+{{ end }}
+
